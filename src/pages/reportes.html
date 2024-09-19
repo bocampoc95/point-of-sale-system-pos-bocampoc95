@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Acess.svg" />
+    <link href="../output.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>micro POS </title>
+  </head>
+  <body class="flex-auto h-screen  font-sans    flex flex-col items-center justify-between ">
+
+  <!-- HEADER -->
+<div id="header_cp" class=" w-full   ">
+</div>
+<!-- HEADER -->
+
+<main class="w-full flex items-center gap-2 justify-between">
+  <!-- <div id="content_dash_cp" class="  ">
+  </div> -->
+ 
+    <div class="flex flex-auto justify-between  p-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Sales Pie Chart -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+
+                <h2 class="text-xl font-bold mb-2">Ventas por Producto</h2>
+                <div id="salesPieChart" class="h-auto"></div>
+            </div>
+            <!-- Revenue Bar Chart -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-2">Ingresos Mensuales</h2>
+                <div id="revenueBarChart"></div>
+            </div>
+            <!-- Orders Line Chart -->
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-2">Pedidos Semanales</h2>
+                <div id="ordersLineChart"></div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-xl font-bold mb-2">Pedidos Semanales</h2>
+                <div id="ordersLineChart2"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+  <div id="access_cp">
+  </div>
+   <!-- ASIDE -->
+  <div id="aside_cp" class="flex flex-col h-full p-4 gap-1 space-y-1"></div>
+
+  <!-- ASIDE -->
+</main>
+
+
+
+
+
+<!-- FOOTER -->
+<div id="footer_cp" class="  w-full  ">
+
+</div>
+
+
+
+</div>
+
+    <script type="module" src="/src/main.ts"></script>
+    <script type="module" src="/src/components/Dashboard.ts"></script>
+    <script>
+      // Configuración del gráfico de ventas por producto (Pie Chart)
+      var salesPieOptions = {
+          chart: {
+              type: 'pie',
+              height: 500
+          },
+          series: [44, 55, 13, 43, 22],
+          labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E']
+      };
+      var salesPieChart = new ApexCharts(document.querySelector("#salesPieChart"), salesPieOptions);
+      salesPieChart.render();
+
+      // Configuración del gráfico de ingresos mensuales (Bar Chart)
+      var revenueBarOptions = {
+          chart: {
+              type: 'bar',
+              height: 280
+          },
+          series: [{
+              name: 'Ingresos',
+              data: [10000, 12000, 15000, 13000, 17000, 19000, 22000]
+          }],
+          xaxis: {
+              categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio']
+          }
+      };
+      var revenueBarChart = new ApexCharts(document.querySelector("#revenueBarChart"), revenueBarOptions);
+      revenueBarChart.render();
+
+      // Configuración del gráfico de pedidos semanales (Line Chart)
+      var ordersLineOptions = {
+          chart: {
+              type: 'line',
+              height: 280
+          },
+          series: [{
+              name: 'Pedidos',
+              data: [30, 40, 35, 50, 49, 60, 70]
+          }],
+          xaxis: {
+              categories: ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6', 'Semana 7']
+          }
+      };
+      var ordersLineChart = new ApexCharts(document.querySelector("#ordersLineChart"), ordersLineOptions);
+      ordersLineChart.render();
+      var ordersLineChart2 = new ApexCharts(document.querySelector("#ordersLineChart2"), ordersLineOptions);
+      ordersLineChart2.render();
+  </script>
+  </body>
+</html>
