@@ -46,3 +46,55 @@ Develop Desing with Tailwind CSS:
 
 ![Design with Tailwind CSS](./public\img\Design-products.png)
 ![Front design and map navegation](./public\img\image.png)
+
+## Users Github
+
+Sí, puedes trabajar con dos repositorios usando diferentes usuarios en Git. Aquí tienes cómo hacerlo:
+
+1. **Configuración Global y Local**: Puedes configurar un usuario global y luego sobrescribirlo con una configuración local específica para cada repositorio.
+
+   ```sh
+   # Configuración global
+   git config --global user.name "Usuario Global"
+   git config --global user.email "global@example.com"
+
+   # Configuración local para el primer repositorio
+   cd /ruta/al/primer/repositorio
+   git config --local user.name "Usuario Local 1"
+   git config --local user.email "local1@example.com"
+
+   # Configuración local para el segundo repositorio
+   cd /ruta/al/segundo/repositorio
+   git config --local user.name "Usuario Local 2"
+   git config --local user.email "local2@example.com"
+   ```
+
+2. **Uso de SSH Config**: Si usas claves SSH para autenticarte, puedes configurar diferentes claves SSH para cada repositorio.
+
+   Primero, genera dos pares de claves SSH:
+
+   ```sh
+   ssh-keygen -t rsa -C "local1@example.com" -f ~/.ssh/id_rsa_local1
+   ssh-keygen -t rsa -C "local2@example.com" -f ~/.ssh/id_rsa_local2
+   ```
+
+   Luego, edita tu archivo `~/.ssh/config` para especificar qué clave usar para cada repositorio:
+
+   ```sh
+   Host github-local1
+       HostName github.com
+       User git
+       IdentityFile ~/.ssh/id_rsa_local1
+
+   Host github-local2
+       HostName github.com
+       User git
+       IdentityFile ~/.ssh/id_rsa_local2
+   ```
+
+   Finalmente, clona los repositorios usando los alias definidos:
+
+   ```sh
+   git clone git@github-local1:usuario1/repo1.git
+   git clone git@github-local2:usuario2/repo2.git
+   ```
