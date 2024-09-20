@@ -44,8 +44,8 @@ This project I used  tools like tailwind CSS.
 
 Develop Desing with Tailwind CSS:
 
-![Design with Tailwind CSS](./public\img\Design-products.png)
-![Front design and map navegation](./public\img\image.png)
+![Design with Tailwind CSS](.\public\img\Design-products.png)
+![Front design and map navegation](.\public\img\image.png)
 
 ## Users Github
 
