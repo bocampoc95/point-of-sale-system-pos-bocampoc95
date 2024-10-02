@@ -2,7 +2,7 @@
 
 
 const Sale =`<div class="w-full overflow-x-auto shadow-md sm:rounded-lg">
-  <div class="Topo w-full justify-between items-center inline-flex">
+  <div class="Topo w-full justify-between items-center inline-flex p-4">
     <div
       class="Productos text-[#464646] text-[32px] font-bold font-['Raleway']"
     >

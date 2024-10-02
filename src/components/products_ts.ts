@@ -8,7 +8,7 @@ const Products =`<!-- CONTENT -->
     <div class="LineaProduto  flex-col justify-start items-start gap-4 inline">
   <!-- Producto title -->
 
-      <div class="Topo w-full justify-between items-center inline-flex">
+      <div class="Topo w-full justify-between items-center inline-flex p-4">
         <div class="Productos text-[#464646] text-[32px] font-bold font-['Raleway']">Productos</div>
         <div class="Botao justify-start items-center gap-2 flex">
           <div class="VerTodo text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver todo</div>

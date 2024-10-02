@@ -3,7 +3,9 @@ const Dashboard =  ` <div class="min-h-screen flex">
 
 
         <!-- Main content -->
+        
         <div class="flex-1 p-6">
+        
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <!-- Sales Pie Chart -->
                 <div class="bg-white p-6 rounded-lg shadow-lg">

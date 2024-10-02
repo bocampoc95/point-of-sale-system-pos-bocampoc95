@@ -36,7 +36,7 @@ const ASIDE =`     <div class="">
         
         </div>
         <!-- Componente config -->
-        <div class="Sales  h-full flex flex-col   justify-between  rounded-md bg-red-300 ">
+        <div class="Sales  h-full flex flex-col   justify-between  rounded-md bg-[#96bcf1] ">
           <div class="SideSales max-w-[282px] max-h-[564px]   ">
             <span class="p-1 font-bold">Ventas</span>
             <div class="Itemsale    ">
@@ -53,12 +53,12 @@ const ASIDE =`     <div class="">
             <div class="flex  ">
         
               <div class="flex items-center bg-fuchsia-500">
-                <button class="Less w-5 h-4  justify-center items-center inline-flex bg-[#ff5d5d] rounded-full "><span
+                <button class="Less w-5 h-4  justify-center items-center inline-flex  bg-red-300  rounded-full "><span
                     class="font-semibold">-</span>
                 </button>
                 <div class=" w-5 h-4   text-black text-sm font-semibold font-['Inter']  text-center">2</div>
         
-                <button class="Add  w-5 h-4  justify-center items-center inline-flex bg-[#97ffb8]   rounded-full"><span>+</span>
+                <button class="Add  w-5 h-4  justify-center items-center inline-flex  bg-green-300    rounded-full"><span>+</span>
                 </button>
               </div>
         

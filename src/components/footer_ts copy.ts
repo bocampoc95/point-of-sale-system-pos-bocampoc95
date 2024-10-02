@@ -3,9 +3,9 @@
 
 const Footer =`
 <!-- FOOTER -->
-<footer class="Foot  w-full h-[234px] flex-col   inline-flex">
+<footer class="Foot  md:w-full  flex-col   md:inline-flex">
     <div class="Footer  h-full p-2 bg-[#eaf2fd] justify-center items-center  ">
-      <div class="Frame1 p-[80.50px] justify-between items-center gap-4 flex mb-1">
+      <div class="Frame1 p-[80.50px] justify-between items-center gap-4 md:flex mb-1">
           <div class="Logotipo w-44 pl-[50px] py-[15.75px] justify-end items-center flex">
             <img class="Logo w-[60px] h-[42px] rounded-full" src="https://via.placeholder.com/42x42" />
 
@@ -20,7 +20,7 @@ const Footer =`
           <div class="QuienesSomos w-[175px] self-stretch text-center text-[#464646] text-base font-medium font-['Raleway']">Quienes somos</div>
       </div>
     </div>
-    <div class="Rodap self-stretch p-8 bg-white justify-center items-center gap-2.5 inline-flex">
+    <div class="Rodap self-stretch p-8 bg-white justify-center items-center gap-2.5 md:inline-flex ">
       <div class="DesarrolladoPorBocSw2023 w-[260px] text-center text-[#464646] text-base font-medium font-['Raleway']">Desarrollado por BOC SW <br/>©2023</div>
     </div>
   </footer>
