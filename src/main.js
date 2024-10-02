@@ -1,9 +1,9 @@
 import './style.css';
 import './styles/index.css';
-import Acess from './components/ButtumSIA';
-import ASIDE from './components/AsideSale';
-import Header from './components/header';
-import Footer from './components/footer';
+import Acess from './components/ButtumSIA.js';
+import ASIDE from './components/AsideSale.js';
+import Header from './components/header.js';
+import Footer from './components/footer.js';
 
 
 
