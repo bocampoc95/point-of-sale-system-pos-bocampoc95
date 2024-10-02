@@ -26,7 +26,7 @@ const Dashboard =  ` <div class="min-h-screen flex">
         </div>
     </div>`
 
-document.querySelector<HTMLDivElement>('#content_dash_cp')!.innerHTML = Dashboard;
+// document.querySelector<HTMLDivElement>('#content_dash_cp')!.innerHTML = Dashboard;
 
 
 export default Dashboard;

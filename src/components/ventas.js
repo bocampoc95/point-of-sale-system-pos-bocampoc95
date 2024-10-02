@@ -133,7 +133,8 @@ const Sale =`<div class="w-full overflow-x-auto shadow-md sm:rounded-lg">
 
 
 
-document.querySelector<HTMLDivElement>('#content_sale_cp')!.innerHTML = Sale;
+let sale = document.getElementById("content_sale_cp");
+sale.innerHTML = Sale
 
 
 

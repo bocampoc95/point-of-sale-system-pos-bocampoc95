@@ -147,6 +147,7 @@ const Clientes = `<div class="w-full overflow-x-auto shadow-md sm:rounded-lg">
   </div>
 `
 
-document.querySelector<HTMLDivElement>('#content_client_cp')!.innerHTML = Clientes
 
+let client = document.getElementById("content_client_cp");
+client.innerHTML = Clientes
 export default Clientes;

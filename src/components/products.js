@@ -125,8 +125,8 @@ const Products =`<!-- CONTENT -->
 
 
 
-document.querySelector<HTMLDivElement>('#content_prod_cp')!.innerHTML = Products;
-
+let product = document.getElementById("content_prod_cp");
+product.innerHTML = Products
 
 
   export default Products
