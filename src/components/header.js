@@ -24,7 +24,7 @@ const Header =`
     </nav>
     </div>
     <div  alt="Avatar" class="DAvatars1   w-[80px] h-[80px]  top-[5px]  flex-col justify-center items-center inline-flex ">
-      <img class="Avatars3dAvatar1 rounded-full  p-4 " src="/public/avatar.svg" />
+      <img class="Avatars3dAvatar1 rounded-full  p-4 " src="./public/avatar.svg" />
     </div>
 </div>
 </div>
