@@ -10,13 +10,13 @@ const Header =`
 <div class="rounded-md m-1  sm:flex  gap-4 justify-between bg-[#EAF2FD] " >
   <div class="Clientes rounded-md  hover:bg-gray-700 hover:text-white  text-center text-[#24292f] text-[15px] font-normal font-['Noto Sans'] leading-normal"><a href="./index.html">Inicio</a>
 </div>
-  <div class="Clientes rounded-md  hover:bg-gray-700 hover:text-white text-center text-[#24292f] text-[15px] font-normal font-['Noto Sans'] leading-normal"><a href="/src/pages/clientes.html">Clientes</a>
+  <div class="Clientes rounded-md  hover:bg-gray-700 hover:text-white text-center text-[#24292f] text-[15px] font-normal font-['Noto Sans'] leading-normal"><a href="./src/pages/clientes.html">Clientes</a>
 </div>
-  <div class="Productos rounded-md  hover:bg-gray-700 hover:text-white  text-center text-[#24292f] text-base font-normal font-['Noto Sans'] leading-normal"><a href="/src/pages/productos.html">Productos</a>
+  <div class="Productos rounded-md  hover:bg-gray-700 hover:text-white  text-center text-[#24292f] text-base font-normal font-['Noto Sans'] leading-normal"><a href="./src/pages/productos.html">Productos</a>
 </div>
-  <div class="Ventas rounded-md  hover:bg-gray-700 hover:text-white  text-center text-[#24292f] text-base font-normal font-['Noto Sans'] leading-normal"><a href="/src/pages/ventas.html">Ventas</a>
+  <div class="Ventas rounded-md  hover:bg-gray-700 hover:text-white  text-center text-[#24292f] text-base font-normal font-['Noto Sans'] leading-normal"><a href="./src/pages/ventas.html">Ventas</a>
 </div>
-  <div class="Reportes rounded-md  hover:bg-gray-700 hover:text-white left-[279.33px] top-[5px]  text-[#24292f] text-[15px] font-normal font-['Noto Sans'] leading-normal"><a href="/src/pages/reportes.html">Reportes</a>
+  <div class="Reportes rounded-md  hover:bg-gray-700 hover:text-white left-[279.33px] top-[5px]  text-[#24292f] text-[15px] font-normal font-['Noto Sans'] leading-normal"><a href="./src/pages/reportes.html">Reportes</a>
 </div>
 
 
