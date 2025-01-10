@@ -11,16 +11,25 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
         <!-- Styles / Scripts -->
-        @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
+        {{-- @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
             @vite(['resources/css/app.css', 'resources/js/app.js'])
-        @endif
+        @endif --}}
+        @viteReactRefresh
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased dark:bg-black dark:text-white/50">
-     <h1>BackEnd api</h1>
-     <h2>Products and categories</h2>
-     <h3>Path: localhost/api/products/</h3>
-     <h3>Path: localhost/api/products/1</h3>
-     <h3>Path: localhost/api/categories/1</h3>
-     <h3>Path: localhost/api/categories/1</h3>
+  
+    <div id="root">No renderMain root
+        
+        <h1>BackEnd api</h1>
+        <h2>Products and categories</h2>
+        <h3>Path: localhost/api/products/</h3>
+        <h3>Path: localhost/api/products/1</h3>
+        <h3>Path: localhost/api/categories/1</h3>
+        <h3>Path: localhost/api/categories/1</h3>
+       
+       
+        <h1>ROOT to render</h1></div>
+
     </body>
 </html>

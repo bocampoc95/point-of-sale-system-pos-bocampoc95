@@ -34,6 +34,7 @@ class CategoryController extends Controller
         //
         $categorie = new Categories();
         $categorie->name = $request->input('name');
+        $categorie->description = $request->input('description');
         $categorie->save();
         return response()->json($categorie, 201);
     }
