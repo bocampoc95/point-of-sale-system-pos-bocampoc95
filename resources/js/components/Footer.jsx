@@ -5,8 +5,10 @@ import ReactDOM from 'react-dom/client';
 function Footer(){ 
     return (
         // <!-- FOOTER -->
-        <footer className="Foot  md:w-full  flex-col   md:inline-flex">
-            <div className="Footer  h-full p-2 bg-[#eaf2fd] justify-center items-center  ">
+
+        <footer className="Foot w-screen ">
+          <div className='sm:w-full   flex-col   md:inline-flex'>
+          <div className="Footer  h-full p-2 bg-[#eaf2fd] justify-center items-center  ">
               <div className="Frame1 p-[80.50px] justify-between items-center gap-4 md:flex mb-1">
                   <div className="Logotipo w-44 pl-[50px] py-[15.75px] justify-end items-center flex">
                     <img className="Logo w-[60px] h-[42px] rounded-full" src="https://via.placeholder.com/42x42" />
@@ -25,6 +27,8 @@ function Footer(){
             <div className="Rodap self-stretch p-8 bg-white justify-center items-center gap-2.5 md:inline-flex ">
               <div className="DesarrolladoPorBocSw2023 w-[260px] text-center text-[#464646] text-base font-medium font-['Raleway']">Desarrollado por BOC SW <br/>©2023</div>
             </div>
+          </div>
+         
           </footer>
         //   <!-- FOOTER -->
     )

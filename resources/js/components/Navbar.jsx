@@ -4,10 +4,12 @@ import { Link } from "react-router-dom";
 import avatar from "/public/avatar.svg";
 const navItems = [
   { name: "Home", path: "/", icon: "🏠" },
-  { name: "Products", path: "/products", icon: "ℹ️" },
+  // { name: "Products", path: "/products", icon: "ℹ️" },
+  { name: "Products", path: "/products", icon: "🛒" },
   { name: "Clients", path: "/clients", icon: "💼" },
-  { name: "Sales", path: "/sales", icon: "💼" },
-  { name: "Reports", path: "/reports", icon: "📞" },
+  { name: "Sales", path: "/sales", icon: "💰" },
+  { name: "Reports", path: "/reports", icon: "📊" },
+  // { name: "Reports", path: "/reports", icon: "📞" },
 ];
 export function Navbar() {
 

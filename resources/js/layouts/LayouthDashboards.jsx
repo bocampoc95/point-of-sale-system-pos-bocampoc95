@@ -9,7 +9,7 @@ function LayouthDashboards() {
   return (
     <div>
         <Navbar/>
-        <div className='w-full  md:flex items-center gap-2 '>
+        <div className='w-screen  md:flex items-center gap-2 '>
         <div className="flex flex-auto justify-between">
     <h1>Reports</h1>
     <Dashboard></Dashboard>

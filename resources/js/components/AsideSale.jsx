@@ -1,125 +1,158 @@
-import React from 'react'
+import React, { useId, useEffect } from 'react';
+import { useCart } from '../hooks/useCart';
+import { useAdd } from '../hooks/useAdd';
 
 function AsideSale() {
+  const { cart, clearCart, addToCart, removeFromCart } = useCart();
+  const [quantities, handleAddQty, handleRemoveQty, resetQuantities] = useAdd();
+  const totalTicket = [];
+  const cartId = useId();
+  const fecha = new Date();
+  const _fecha = fecha.getDate()+'/'+fecha.getMonth()+1+'/'+fecha.getFullYear()
+  useEffect(() => {
+    resetQuantities();
+  }, [cart]);
+
   return (
-    <div>
-
-<div className="">
-
-<div className="ASIDE space-y-3  p-1 gap-1  justify-between">
-  {/* <!-- Componente config --> */}
-  <div className="Config max-w-[282px] h-24  bg-[#eaf2fd] flex flex-auto justify-between  p-1 gap-1">
-    <div className="flex flex-col justify-center ">
-      <div className="Buttonbase px-3 py-2 bg-[#002583] rounded-md justify items-center gap-2 flex">
-        <div className="Content justify-start items-center gap-2 flex">
-          <div className="Bookmark w-4 h-4 rounded-full justify-center items-center flex bg-white"> 
-        
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z" />
-          </svg>
-          
-          </div>
-          <div className="Label text-white text-sm font-semibold font-['Inter'] leading-[14px]"><span className="">FAQ</span></div>
-        </div>
-      </div>
-    </div>
-    <div className="PrimaryButton flex flex-col justify-center ">
-      <div className="Buttonbase px-3 py-2 bg-[#002583] rounded-md justify-start items-center gap-2 flex">
-        <div className="Content justify-start items-center gap-2 flex">
-          <div className="Bookmark w-4 h-4 rounded-full justify-center items-center flex bg-white">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z" />
-            </svg>
-          </div>
-          <div className="Label text-white text-sm font-semibold font-['Inter'] leading-[14px]">Configuración</div>
-        </div>
-      </div>
-    </div>
-  {/* <!-- Componente config --> */}
-  
-  </div>
-  {/* <!-- Componente config --> */}
-  <div className="Sales  h-full flex flex-col   justify-between  rounded-md bg-[#96bcf1] ">
-    <div className="SideSales max-w-[282px] max-h-[564px]   ">
-      <span className="p-1 font-bold">Ventas</span>
-      <div className="Itemsale    ">
-    <div className="flex  justify-between p-7">
-      <div className="Produto w-28   flex-col justify-between items-center gap-2  p-1">
-        <div className="Img   bg-white flex-col items-center  gap-2 flex">
-          <img className=" rounded-full   " src="https://via.placeholder.com/71x71" />
-        </div>
-        <div className="Producto self-stretch text-[#464646]  text-center text-sm font-medium font-['Raleway']">Producto XYZ
-        </div>
-        <div className="Price self-stretch text-[#464646] text-center text-base font-bold font-['Raleway']">$ 60,00</div>
-      </div>
-  
-      <div className="flex  ">
-  
-        <div className="flex items-center bg-fuchsia-500">
-          <button className="Less w-5 h-4  justify-center items-center inline-flex  bg-red-300  rounded-full "><span
-              className="font-semibold">-</span>
-          </button>
-          <div className=" w-5 h-4   text-black text-sm font-semibold font-['Inter']  text-center">2</div>
-  
-          <button className="Add  w-5 h-4  justify-center items-center inline-flex  bg-green-300    rounded-full"><span>+</span>
-          </button>
-        </div>
-  
-      </div>
-    </div>
-  
-      </div>
-    
-    </div>
-    
-    
-    
-    
-    {/* <!-- PAYMENT --> */}
-    <div className="Payment  flex flex-col p-2  items-center ">
-      <div className="Pay w-[243px]    bg-[#002583] rounded-[20px] p-4">
-        <div className="flex flex-auto justify-between p-3">
-          <div className="Total    text-white text-sm font-semibold font-['Inter'] leading-[14px]">Total</div>
-          <div className="Precio  text-white text-sm font-semibold font-['Inter'] leading-[14px]">120</div>
-        </div>
-        <div className="flex flex-auto flex-col justify-between items-center">
-          <div className="Pagos   text-white text-sm font-semibold font-['Inter'] ">Pagos</div>
-    
-        </div>
-        <div className="Line    border border-white"></div>
-    
-        <div className="flex  justify-between p-1">
-          <div className="CashButton left-[23px] top-[120px]  justify-start items-start inline-flex">
-            <div className="Buttonbase px-3 py-2 bg-[#eaf2fd] rounded-md justify-start items-center gap-2 flex">
-              <div className="Content justify-start items-center gap-2 flex">
-                <div className="Bookmark w-4 h-4 px-[3.33px] py-0.5 justify-center items-center flex">icon</div>
-                <div className="Label text-black text-sm font-semibold font-['Inter'] leading-[14px]">Cash</div>
-    
+    <div className="bg-slate-500 align-top space-y-3 p-1 gap-1 justify-between">
+      {/* Contenedor Sticky */}
+      <div className="align-top top-0 bg-white z-10">
+        <div className="ASIDE space-y-3 p-1 gap-1">
+          {/* Configuración */}
+          <div className="Config bg-[#eaf2fd] flex justify-between p-3 gap-2 rounded-md">
+            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md">
+              <div className="Bookmark w-4 h-4 flex items-center justify-center bg-white rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 5.25h.008v.008H12v-.008Z"
+                  />
+                </svg>
               </div>
-            </div>
-          </div>
-          <div className="CardButton left-[135px] top-[120px]  justify-start items-start inline-flex">
-            <div className="Buttonbase px-3 py-2 bg-[#eaf2fd] rounded-md justify-start items-center gap-2 flex">
-              <div className="Content justify-start items-center gap-2 flex">
-                <div className="Bookmark w-4 h-4 px-[3.33px] py-0.5 justify-center items-center flex">Icon</div>
-                <div className="Label text-black text-sm font-semibold font-['Inter'] leading-[14px]">Card</div>
+              <span className="text-white text-sm font-semibold">FAQ</span>
+            </button>
+
+            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md">
+              <div className="Bookmark w-4 h-4 flex items-center justify-center bg-white rounded-full">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M11.42 15.17 17.25 21A2.652 2.652 0 0 0 21 17.25l-5.877-5.877M11.42 15.17l2.496-3.03c.317-.384.74-.626 1.208-.766M11.42 15.17l-4.655 5.653a2.548 2.548 0 1 1-3.586-3.586l6.837-5.63m5.108-.233c.55-.164 1.163-.188 1.743-.14a4.5 4.5 0 0 0 4.486-6.336l-3.276 3.277a3.004 3.004 0 0 1-2.25-2.25l3.276-3.276a4.5 4.5 0 0 0-6.336 4.486c.091 1.076-.071 2.264-.904 2.95l-.102.085m-1.745 1.437L5.909 7.5H4.5L2.25 3.75l1.5-1.5L7.5 4.5v1.409l4.26 4.26m-1.745 1.437 1.745-1.437m6.615 8.206L15.75 15.75M4.867 19.125h.008v.008h-.008v-.008Z"
+                  />
+                </svg>
               </div>
-            </div>
+              <span className="text-white text-sm font-semibold">Configuración</span>
+            </button>
           </div>
-        </div>
+
+          {/* Ventas */}
+          <div className="Sales flex flex-col bg-[#96bcf1] rounded-md p-3">
+            <div  className='flex flex-row justify-between'>
+
+            <span className="font-bold mb-2">Ventas</span>
+            <span className="font-bold mb-2">Fecha: {_fecha}</span>
+            </div>
+            <div className="ItemSale flex justify-between items-center gap-4 flex-col">
+              {/* Producto */}
+              {cart && cart.length > 0 ? (
+                cart.map((product) => {
+                  const qty = quantities[product.id] || product.quantity;
+                  let valueP = qty * product.price;
+                  totalTicket.push(valueP);
+                  return (
     
-      </div>
-    </div>
-      {/* <!-- PAYMENT --> */}
+                    <div key={product.id} className="flex justify-between items-center w-full mb-2">
+  <div className="Produto flex flex-col items-center my-4">
+    <img
+      className="imagen w-16 h-16 rounded-full bg-white"
+      src={product.url_image}
+      alt={product.name}
+    />
+    <span className="name text-[#464646] text-sm font-medium">{product.name}</span>
+    
+    {/* Precio unitario */}
+    <span className="price text-[#464646] text-base font-bold">${product.price}</span>
+    
+    {/* Línea divisoria */}
+    <div className="w-full border-t border-black my-2"></div>
+    
+    {/* Precio total por cantidad */}
+    <span className="price text-[#464646] text-base font-bold">${valueP}</span>
   </div>
-    
   
-  
+  {/* Contador */}
+  <div className="flex items-center gap-2">
+    <button
+      className="Less w-6 h-6 bg-red-300 rounded-full flex items-center justify-center hover:bg-red-400 hover:shadow-lg"
+      onClick={() => handleRemoveQty(product.id, qty)}
+    >
+      <span>-</span>
+    </button>
+    <span className="text-black text-sm font-semibold">{qty}</span>
+    <button
+      className="Add w-6 h-6 bg-green-300 rounded-full flex items-center justify-center hover:bg-green-400 hover:shadow-lg"
+      onClick={() => handleAddQty(product.id, product.stock, qty)}
+    >
+      <span>+</span>
+    </button>
   </div>
 </div>
 
+                  );
+                })
+              ) : (
+                <p className="text-gray-500 col-span-full">No hay productos en el carrito.</p>
+              )}
+            </div>
+          </div>
+
+          <div className="flex justify-between gap-4 ">
+              <button className="bg-red-600 text-black px-3 py-2 rounded-md" onClick={clearCart}>Trash</button>
+              {/* <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md">Pago</button> */}
+            </div>
+          {/* Pago */}
+          <div className="Payment bg-[#002583] rounded-md p-3 text-white flex flex-col gap-2">
+            <div className="flex justify-between">
+              <span>Total</span>
+              <span>${totalTicket.reduce((a, b) => a + b, 0)}</span>
+            </div>
+       
+
+            <div className="flex justify-between gap-4 ">
+              <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md">Cash</button>
+              <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md">Card</button>
+            </div>
+          </div>
+
+          {/* Botón de Nueva venta */}
+          <div className="Config bg-[#eaf2fd] flex justify-center p-3 gap-2 rounded-md">
+            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md">
+              <div className="Bookmark w-5 h-6 flex items-center justify-center bg-white rounded-full">
+                <i>🧾</i>
+              </div>
+              <span className="text-white text-sm font-semibold">Nueva venta</span>
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default AsideSale
+export default AsideSale;

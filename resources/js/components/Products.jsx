@@ -1,159 +1,143 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react';
 import useApi from '../hooks/useApi';
 import { getProduct } from '../services/productService';
+import { useCart } from '../hooks/useCart';
+import { useAdd } from '../hooks/useAdd';
+
 function Products() {
-    const { data: products, error, loading, request: fetchUsers } = useApi(getProduct);
+  const { data: products, error, loading, request: fetchProducts } = useApi(getProduct);
+  const [quantities, handleAddQty, handleRemoveQty] = useAdd();
 
-    // // Llama a la API cuando el componente se monte
-    useEffect(() => {
-      fetchUsers();
-    }, []); // Solo se ejecuta una vez al montar
-  
-    if (loading) return <p>Cargando  products...</p>;
-    if (error) return <p>Error al cargar products: {error}</p>;
-  console.log(products)
+  // Llama a la API cuando el componente se monte
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Cargando productos...</p>;
+  if (error) return <p>Error al cargar productos: {error}</p>;
+
+  const { addToCart, removeFromCart, cart } = useCart();
+  const checkProductInCart = product => {
+    return cart.some(item => item.id === product.id);
+  };
+
   return (
-    <div>
-          <div className="Productos w-full   flex-col justify-center items-start gap-[106px] ">
+    <div className="align-top w-full flex flex-col items-start p-6">
+      {/* Encabezado */}
+      <div className="flex justify-between items-center w-full mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
+        <button className="text-blue-600 font-bold hover:underline">
+          Ver todo
+        </button>
+      </div>
 
-    
-<div className="LineaProduto  flex-col justify-start items-start gap-4 inline">
+      {/* Lista de productos */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products && products.length > 0 ? (
+          products.map((product) => {
+            const isProductInCart = checkProductInCart(product);
+            const qty = quantities[product.id] || 0;
+            // console.log(quantities[product.id] )
+            // console.log(qty)
+            product.quantity = qty;
+            return (
+              <div
+                key={product.id}
+                className="bg-white p-4 rounded-lg shadow-md flex flex-col gap-4"
+              >
+                {/* Imagen del producto */}
+                <div className="w-full h-40 bg-gray-100 rounded-lg overflow-hidden">
+                  <img
+                    src={product.url_image || 'https://via.placeholder.com/176x174'}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-  <div className="Topo w-full justify-between items-center inline-flex p-4">
-    <div className="Productos text-[#464646] text-[32px] font-bold font-['Raleway']">Productos</div>
-    <div className="Botao justify-start items-center gap-2 flex">
-      <div className="VerTodo text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver todo</div>
-      <div className="ArrowBackBlack24dp1 w-6 h-6 "> logo</div>
-    </div>
-  </div>
-  <div className="Produtos justify-between items-start gap-4  p-4">
-  {products && products.length > 0 ? (
-    
-        <ul>
-          {products.map((product) => (
-            <div className="Produto flex-col justify-start items-start gap-2 inline-flex p-2" key={product.id}>
+                {/* Información del producto */}
+                <div className="flex flex-col gap-2">
+                  <h2 className="text-lg font-medium text-gray-900 truncate">
+                    {product.name}
+                  </h2>
+                  <p className="text-sm text-gray-600 line-clamp-2 break-words">
+                    {product.description}
+                  </p>
+                  <p className="text-lg font-bold text-gray-800">${product.price}</p>
+                  <p className="text-sm font-semibold text-gray-700">
+                    {product.stock} und
+                  </p>
+                </div>
 
-            <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-              <img className="img self-stretch grow shrink basis-0" src={ "https://via.placeholder.com/176x174"||product.url_image}  alt="Product"/>
-            </div>
-            <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">{product.name}</div>
-            <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ {product.price}</div>
-            <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']"> {product.stock} und</div>
-            <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway'] w-48 ">{product.description}</div>
-            
-        <div class="flex items-center bg-[#2a7ae4]">
-          <button class="Less w-5 h-4  justify-center items-center inline-flex  bg-red-300  rounded-full "><span
-              class="font-semibold">-</span>
-          </button>
-          <div class=" w-5 h-4   text-black text-sm font-semibold font-['Inter']  text-center">2</div>
-  
-          <button class="Add  w-5 h-4  justify-center items-center inline-flex  bg-green-300    rounded-full"><span>+</span>
-          </button>
-        </div>
-            
-            </div>
+                {/* Botones de acción */}
+                <div className="flex items-center justify-center gap-10 mt-2">
+                  <button className="w-8 h-8 flex items-center justify-center bg-red-300 rounded-full font-bold hover:bg-red-400 hover:shadow-lg" onClick={() => handleRemoveQty(product.id)}>
+                    -
+                  </button>
+                  <span className="text-sm font-semibold">{qty}</span>
+                  <button className="w-8 h-8 flex items-center justify-center bg-green-300 rounded-full font-bold hover:bg-green-400 hover:shadow-lg" onClick={() => handleAddQty(product.id, product.stock)}>
+                    +
+                  </button>
+                </div>
+                <div className='flex align-middle justify-center'>
+              
+                  <button
+  className={`flex items-center justify-center gap-2 px-4 py-2 rounded-full border  ${
+    qty === 0 ? 'hidden' : ''
+  }  ${
+    isProductInCart ? ' bg-orange-500 text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:bg-amber-400 hover:shadow-lg' : 'bg-emerald-500  text-white font-semibold shadow-md transition-all duration-300 ease-in-out hover:hover:bg-green-500 shadow-lg'} ` }
+  onClick={() => {
+    isProductInCart ? removeFromCart(product) : addToCart(product);
+  }}
+>
+  {isProductInCart ? (
+    < >
+      <span className=''>Remove</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-5 h-5"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M19.5 12h-15"
+        />
+      </svg>
+    </>
+  ) : (
+    <>
+      <span>Add</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="w-5 h-5"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 4.5v15m7.5-7.5h-15"
+        />
+      </svg>
+    </>
+  )}
+</button>
 
-          ))}
-        </ul>
-      ) : (
-        <p>No hay usuarios disponibles.</p>
-      )}
-    
-    {/* <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-      <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-        <img className="UnsplashEprfeHbnjo self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <p className="text-gray-500 col-span-full">No hay productos disponibles.</p>
+        )}
       </div>
-      <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-      <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-      <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
     </div>
-    <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-      <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-        <img className="UnsplashKegtodvn0l4 self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-      </div>
-      <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-      <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-      <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-    </div>
-    <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-      <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-        <img className="Unsplash4ohkk555s1a self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-      </div>
-      <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-      <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-      <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-    </div>
-    <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-      <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-        <img className="UnsplashR8l1l9rn198 self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-      </div>
-      <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-      <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-      <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-    </div>
-    <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-      <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-        <img className="Unsplash1vv1mrafd7a self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-      </div>
-      <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-      <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-      <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-    </div> */}
-  </div>
-</div>
-{/* <div className="Produtos self-stretch justify-start items-start gap-4  p-4 ">
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashFmpOcze3ay self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="CamisaAtari self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Camisa Atari</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashBugaiazysh0 self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="CamisaSnes self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Camisa SNES</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashSyvyZkwaxu self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="ControlYConsolaXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Control y consola XYZ</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashJmt6brgbuxu self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="ControlYConsolaXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Control y consola XYZ</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashMxvkwpijals self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="ControlYConsolaXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Control y consola XYZ</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-  <div className="Produto flex-col justify-start items-start gap-2 inline-flex">
-    <div className="Skill w-44 h-[174px] bg-white flex-col justify-end items-start gap-2 flex">
-      <img className="UnsplashR27umxaeldc self-stretch grow shrink basis-0" src="https://via.placeholder.com/176x174" />
-    </div>
-    <div className="ProductoXyz self-stretch text-[#464646] text-sm font-medium font-['Raleway']">Producto XYZ</div>
-    <div className="6000 self-stretch text-[#464646] text-base font-bold font-['Raleway']">$ 60,00</div>
-    <div className="VerProducto text-[#2a7ae4] text-base font-bold font-['Raleway']">Ver producto</div>
-  </div>
-</div> */}
-</div>
-    </div>
-  )
+  );
 }
 
-export default Products
+export default Products;

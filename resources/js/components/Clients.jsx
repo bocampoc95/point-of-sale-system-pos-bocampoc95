@@ -14,7 +14,7 @@ function Clients() {
     if (loading) return <p>Cargando clientes...</p>;
     if (error) return <p>Error al cargar clientes: {error}</p>;
   return (
-    <div className="w-full overflow-x-auto shadow-md sm:rounded-lg">
+    <div className="align-top w-full overflow-x-auto shadow-md sm:rounded-lg">
       <div className="Topo w-full justify-between items-center inline-flex">
         <div className="Productos text-[#464646] text-[32px] font-bold font-['Raleway']">Clientes</div>
         <div className="Botao justify-start items-center gap-2 flex">

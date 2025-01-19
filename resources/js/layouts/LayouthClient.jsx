@@ -7,9 +7,9 @@ import AccessibilityPanel from '../components/AccessibilityPanel'
 
 export default function LayouthClient() {
   return (
-    <div>
+    <div className=''>
         <Navbar/>
-        <div className='w-full  md:flex items-center gap-2 '>
+        <div className='w-screen  md:flex items-center gap-2 '>
         <div className="flex flex-auto justify-between">
     <Clients/>
      
