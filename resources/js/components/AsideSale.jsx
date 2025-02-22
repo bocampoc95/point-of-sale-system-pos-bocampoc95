@@ -1,8 +1,15 @@
-import React, { useId, useEffect } from 'react';
+import React, { useId, useEffect,useState } from 'react';
 import { useCart } from '../hooks/useCart';
 import { useAdd } from '../hooks/useAdd';
+import FormAddCustomer from './FormAddCustomer';
+import useApi from '../hooks/useApi';
+import { getLastCustomer } from '../services/customerService';
+import FormPayOrder from './FormPayOrder';
+import { getLastOrder } from '../services/saleService';
+import { useAuth } from '../hooks/useAuth';
 
 function AsideSale() {
+  const data =useAuth();
   const { cart, clearCart, addToCart, removeFromCart } = useCart();
   const [quantities, handleAddQty, handleRemoveQty, resetQuantities] = useAdd();
   const totalTicket = [];
@@ -12,7 +19,29 @@ function AsideSale() {
   useEffect(() => {
     resetQuantities();
   }, [cart]);
+const [isOpenC, setIsOpenC] = useState(false);
 
+const toggleCustomer = () => {
+  setIsOpenC(!isOpenC);
+};
+const [isOpenCash, setIsOpenCash] = useState(false);
+const toggleCash = () => {
+  setIsOpenCash(!isOpenCash);
+};
+const { data: customer, error, loading, request: fetchCustomer } = useApi(getLastCustomer);
+  useEffect(() => {
+    fetchCustomer();
+  }, []);
+  const info = customer || '';
+
+  const { data: order, request: fetchOrder } = useApi(getLastOrder);
+  useEffect(() => {
+    fetchOrder();
+  }, []);
+  console.log(data)
+  console.log("ORDEE")
+
+  console.log(order)
   return (
     <div className="bg-slate-500 align-top space-y-3 p-1 gap-1 justify-between">
       {/* Contenedor Sticky */}
@@ -68,6 +97,9 @@ function AsideSale() {
             <span className="font-bold mb-2">Ventas</span>
             <span className="font-bold mb-2">Fecha: {_fecha}</span>
             </div>
+            <span className="font-bold mb-2">Orden: {_fecha}</span>
+            <span className="font-bold mb-2">Cliente: {info.name}</span>
+
             <div className="ItemSale flex justify-between items-center gap-4 flex-col">
               {/* Producto */}
               {cart && cart.length > 0 ? (
@@ -135,19 +167,36 @@ function AsideSale() {
        
 
             <div className="flex justify-between gap-4 ">
-              <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md">Cash</button>
+              <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md" onClick={toggleCash}>Cash</button>
               <button className="bg-[#eaf2fd] text-black px-3 py-2 rounded-md">Card</button>
             </div>
           </div>
 
           {/* Botón de Nueva venta */}
           <div className="Config bg-[#eaf2fd] flex justify-center p-3 gap-2 rounded-md">
-            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md">
+            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md" >
               <div className="Bookmark w-5 h-6 flex items-center justify-center bg-white rounded-full">
                 <i>🧾</i>
               </div>
               <span className="text-white text-sm font-semibold">Nueva venta</span>
             </button>
+            <button className="Buttonbase flex items-center gap-2 px-3 py-2 bg-[#002583] rounded-md" onClick={toggleCustomer}>
+              <div className="Bookmark w-5 h-6 flex items-center justify-center bg-white rounded-full">
+                <i>🙋🏻‍♂️</i>
+              </div>
+              <span className="text-white text-sm font-semibold">Nuevo Cliente</span>
+            </button>
+            
+            <FormAddCustomer isOpen={isOpenC} 
+            order={{"user_id": data.token,
+    "total_amount": totalTicket.reduce((a, b) => a + b, 0),
+    "status": "Pending"}}
+        onClose={() => setIsOpenC(false)}/>
+
+        <FormPayOrder isOpen={isOpenCash} 
+        data={totalTicket.reduce((a, b) => a + b, 0)}
+        order={order}
+        onClose={() => setIsOpenCash(false)} />
           </div>
         </div>
       </div>

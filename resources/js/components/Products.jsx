@@ -1,13 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import useApi from '../hooks/useApi';
+import { getCategory } from '../services/categoryService';
 import { getProduct } from '../services/productService';
 import { useCart } from '../hooks/useCart';
 import { useAdd } from '../hooks/useAdd';
+import FormularioAgregarProducto from './FormularioAgregarProducto';
+import FormularioDeleteProducto from './FormularioDeleteProducto';
+import FormularioAgregarCategoria from './FormularioAgregarCategoria';
+import { useAuth } from '../hooks/useAuth';
 
 function Products() {
   const { data: products, error, loading, request: fetchProducts } = useApi(getProduct);
   const [quantities, handleAddQty, handleRemoveQty] = useAdd();
+  const { data: categorias, errorc, loadingc, request: fetchCategorys } = useApi(getCategory);
+    useEffect(() => {
+      fetchCategorys();
+    }, []);
+    if (loadingc) return <p>Cargando productos...</p>;
+    if (errorc) return <p>Error al cargar : {errorc}</p>;
 
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [isDelOpen, setIsDelOpen] = useState(false);
+
+const toggleForm = () => {
+  setIsFormOpen(!isFormOpen);
+};
+const toggleDeleteP = () => {
+  setIsDelOpen(!isDelOpen);
+};
+
+const [isFormOpenC, setIsFormOpenC] = useState(false);
+
+const toggleFormC = () => {
+  setIsFormOpenC(!isFormOpenC);
+};
   // Llama a la API cuando el componente se monte
   useEffect(() => {
     fetchProducts();
@@ -26,9 +52,35 @@ function Products() {
       {/* Encabezado */}
       <div className="flex justify-between items-center w-full mb-6">
         <h1 className="text-2xl font-bold text-gray-800">Productos</h1>
-        <button className="text-blue-600 font-bold hover:underline">
-          Ver todo
-        </button>
+     
+        <button 
+  className="text-blue-600 font-bold hover:underline" 
+  onClick={toggleForm}>
+  Agregar producto
+</button>
+<button 
+  className="text-blue-600 font-bold hover:underline" 
+  onClick={toggleDeleteP}>
+  Eliminar producto
+</button>
+<button 
+  className="text-blue-600 font-bold hover:underline" 
+  onClick={toggleFormC}>
+  Agregar categoria
+</button>
+
+<FormularioAgregarProducto
+        isOpen={isFormOpen} 
+        onClose={() => setIsFormOpen(false)}
+        categorias={categorias}
+      />
+  <FormularioDeleteProducto isOpen={isDelOpen} 
+        onClose={() => setIsDelOpen(false)}
+        categorias={products}
+  />
+<FormularioAgregarCategoria isOpen={isFormOpenC} 
+        onClose={() => setIsFormOpenC(false)}/>
+        
       </div>
 
       {/* Lista de productos */}

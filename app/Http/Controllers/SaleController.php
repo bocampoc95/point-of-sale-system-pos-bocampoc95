@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -44,6 +45,13 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         //
+        $newSale = new Payment();
+        $newSale->order_id = $request->input('order_id');
+        $newSale->amount = $request->input('amount');
+        $newSale->method = $request->input('method');
+        $newSale->status = $request->input('status');
+        $newSale->save();
+        return response()->json($newSale, 200);
     }
 
     /**

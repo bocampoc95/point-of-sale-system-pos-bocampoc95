@@ -1,19 +1,20 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
+import NavbarPublic from '../components/NavbarPublic'
 import AccessibilityPanel from '../components/AccessibilityPanel'
 import Footer from '../components/Footer'
-import ProductGallery from '../components/ProductGallery'
+import Register from '../components/Register'
+import Login from '../components/Login'
 export default function LayouthPublic() {
   const fecha = new Date();
 
   return (
     <div>
-        <Navbar/>
+        <NavbarPublic/>
 
 <div>
   Public Login 
-  ADMIN
-  App laravel reac  {fecha.getFullYear()}
+  ADMIN POS
+  App laravel react  {fecha.getFullYear()}
   <>
   {/* <img src="images/leche.jpg" alt="Leche">
   n */}
@@ -24,9 +25,18 @@ export default function LayouthPublic() {
 
   </>
 
+  <div >
+  <div className='flex flex-row gap-2 p-2 justify-center'>
+  <div className='flex flex-col items-center '></div>
+<Register></Register>
+
+<Login></Login>
+  </div>
 
 </div>
 <AccessibilityPanel/>
+  </div>
+
 
 <Footer/>
 

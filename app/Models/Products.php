@@ -16,6 +16,7 @@ class Products extends Model
         'description',
         'stock',
         'price',
+        'url_image',
     ];
     // category relationship
     public function category() {

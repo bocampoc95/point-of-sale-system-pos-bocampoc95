@@ -1,17 +1,18 @@
 import React  from 'react'
 import ReactDOM from 'react-dom/client';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import LayouthAdmin from './layouts/LayouthProducts';
-import LayouthPublic from './layouts/LayouthPublic';
-import LayouthProducts from './layouts/LayouthProducts';
-import LayouthClient from './layouts/LayouthClient';
-import LayouthDashboards from './layouts/LayouthDashboards';
-import LayouthSales from './layouts/LayouthSales';
+// import LayouthAdmin from './layouts/LayouthProducts';
+// import LayouthPublic from './layouts/LayouthPublic';
+// import LayouthProducts from './layouts/LayouthProducts';
+// import LayouthClient from './layouts/LayouthClient';
+// import LayouthDashboards from './layouts/LayouthDashboards';
+// import LayouthSales from './layouts/LayouthSales';
 import { PublicRoute } from './auth/PublicRoute';
-import { LoginScreen } from './components/Login';
+// import { LoginScreen } from './components/Login';
 import { PrivateRoute } from './auth/privateroute';
-import { InitApp } from './InitApp';
+// import { AuthProvider } from './InitApp';
 import { CartContext, CartProvider } from './context/CartContext';
+import {AuthProvider} from './context/AuthContext';
 import { LayouthPrivate } from './layouts/LayouthPrivate';
 
 
@@ -28,7 +29,8 @@ export default function AppMain() {
             <Routes>
             <Route path="/public" element={
                     <PublicRoute>
-                        <LoginScreen />
+                        {/* <LoginScreen /> */}
+                        Esto es un hijo
                     </PublicRoute>
                 } 
                 />
@@ -80,8 +82,13 @@ if (document.getElementById('root')) {
 
     Index.render(
         <React.StrictMode>
-            <InitApp></InitApp>
-            {/* <AppMain/> */}
+            <AuthProvider>
+
+            <AppMain/>
+            </AuthProvider>
+
+
+            
          </React.StrictMode>
     )
 }

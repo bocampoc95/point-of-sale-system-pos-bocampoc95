@@ -66,11 +66,14 @@ function Sales() {
                       alt="Avatar"
                       className="DAvatars1 w-[40px] h-[40px] flex-col justify-center items-center inline-flex"
                     >
-                      <img
+                      {/* <img
                         className="Avatars3dAvatar1 w-[40px] h-[40px] rounded-full"
                         src={sale.avatar || 'https://via.placeholder.com/40x40'}
                         alt="Avatar"
-                      />
+                      /> */}
+                          <div className='w-[20px] h-[20px] rounded-full bg-slate-500'>
+                      🙋🏻‍♂️
+                      </div>
                     </div>
                     <p>{sale.name}</p>
                   </div>

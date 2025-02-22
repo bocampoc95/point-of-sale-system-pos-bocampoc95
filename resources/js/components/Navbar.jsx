@@ -1,7 +1,8 @@
 // import PropTypes from 'prop-types'
 import React  from 'react'
-import { Link } from "react-router-dom"; 
+import { Link, useNavigate } from "react-router-dom"; 
 import avatar from "/public/avatar.svg";
+import { useAuth } from '../hooks/useAuth';
 const navItems = [
   { name: "Home", path: "/", icon: "🏠" },
   // { name: "Products", path: "/products", icon: "ℹ️" },
@@ -12,6 +13,8 @@ const navItems = [
   // { name: "Reports", path: "/reports", icon: "📞" },
 ];
 export function Navbar() {
+  const data =useAuth();
+
 
     return (
         <div id="header" className="      bg-[#96bcf1] w-screen">
@@ -38,10 +41,29 @@ export function Navbar() {
       </div>
           </nav>
           </div>
-          <div  alt="Avatar" className="DAvatars1   w-[80px] h-[80px]  top-[5px]  flex-col justify-center items-center inline-flex ">
-            {/* <img className="Avatars3dAvatar1 rounded-full  p-4 " src="/public/avatar.svg" /> */}
-            <img className="Avatars3dAvatar1 rounded-full  p-4 " src={avatar} />
-          </div>
+
+          <div className="flex justify-center items-center gap-4 p-3">
+
+            <button 
+              onClick={data.logout} 
+              className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-700"
+            >
+              Logout
+            </button>
+  {/* Nombre de usuario */}
+  <div className="text-lg font-medium">{data.user}</div>
+
+  {/* Avatar */}
+  <div className="w-[80px] h-[80px] flex justify-center items-center">
+    <img 
+      className="rounded-full p-2" 
+      src={avatar} 
+      alt="Avatar"
+    />
+  </div>
+</div>
+
+      
       </div>
 
 

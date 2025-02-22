@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Products;
 use Illuminate\Http\Request;
+use Laravel\Pail\ValueObjects\Origin\Console;
 
 class ProductController extends Controller
 {
@@ -41,6 +42,14 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->description = $request->input('description');
         $product->stock = $request->input('stock');
+   
+        // if ($request->hasFile('url_image')) {
+        //     $file = $request->file('url_image');
+        //     $path = $file->store('images', 'public');
+        //     $product->url_image = $path;
+        //     print($path);
+        // }
+        $product->url_image = $request->input('url_image');
         $product->price = $request->input('price');
         $product->categories_id = $request->input('categories_id');
         $product->save();

@@ -11,6 +11,6 @@ export const PublicRoute = ({ children }) => {
 
     
     return user.logged
-        ? <Navigate to="/clients" />
+        ? <Navigate to="/" />
         : children
 }

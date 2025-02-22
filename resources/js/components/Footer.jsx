@@ -11,7 +11,7 @@ function Footer(){
           <div className="Footer  h-full p-2 bg-[#eaf2fd] justify-center items-center  ">
               <div className="Frame1 p-[80.50px] justify-between items-center gap-4 md:flex mb-1">
                   <div className="Logotipo w-44 pl-[50px] py-[15.75px] justify-end items-center flex">
-                    <img className="Logo w-[60px] h-[42px] rounded-full" src="https://via.placeholder.com/42x42" />
+                    {/* <img className="Logo w-[60px] h-[42px] rounded-full" src="https://via.placeholder.com/42x42" /> */}
         
                     <div className="Texto w-[126px] self-stretch pr-2 justify-start p-2 ">
                       <div className="BocSoft w-[152px] h-[55px] text-center text-black text-base font-bold font-['Raleway'] leading-10">BOC SOFT</div>

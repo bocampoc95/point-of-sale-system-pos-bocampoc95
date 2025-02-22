@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class CustomerController extends Controller
 {
@@ -22,7 +23,9 @@ class CustomerController extends Controller
         // //     }
         // // }
         // $orders = Order::with(['customer:id,name,email']) // Selecciona solo los campos necesarios
-        //     ->select('id as order_id', 'customer_id', 'date', 'status')->get();
+        //     ->select('id as order_id', 'customer_id', 'date', 'status')->get(); 
+
+        
         $orders = Order::with(['customer:id,name,email']) // Carga la relación con Customer
             ->select('id as order_id', 'customer_id', 'created_at as date','total_amount', 'status') // Selecciona columnas de Order
             ->get()->map(function ($order) {
@@ -53,6 +56,13 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         //
+        $customer = new Customer();
+        $customer->name = $request->input('name');
+        $customer->email = $request->input('email');
+        $customer->phone = $request->input('phone');
+        $customer->address = $request->input('address');
+        $customer->save();
+        return response()->json($customer, 201); 
     }
 
     /**
@@ -61,6 +71,13 @@ class CustomerController extends Controller
     public function show(string $id)
     {
         //
+        $customer = Customer::find($id);
+        
+        if ($customer) {
+            return response()->json($customer, 200);
+        } else {
+            return response()->json(['message' => "No encontrado id: {$id}"], 404);
+        }
     }
 
     /**
@@ -85,5 +102,11 @@ class CustomerController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function lastregister(){
+        // $consulta = Customer::all()->latest()->first();
+        $consulta = Customer::all()->last();
+        return response()->json($consulta, 200);
     }
 }

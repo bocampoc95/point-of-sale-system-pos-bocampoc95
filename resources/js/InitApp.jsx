@@ -1,34 +1,34 @@
-import { useEffect, useReducer } from 'react';
-// import { AuthContext } from './auth/authContext';
-import { AuthContext } from './auth/privateroute';
-import { authReducer } from './reducer/AuthReducer';
-// import { authReducer } from './auth/authReducer';
-// import { AppRouter } from './routers/AppRouter';
-import AppMain from './AppMain';
+// import {  useEffect, useReducer } from 'react';
+// // import { AuthContext } from './auth/authContext';
+// import { AuthContext } from './auth/privateroute';
 // import { authReducer } from './reducer/AuthReducer';
+// // import { authReducer } from './auth/authReducer';
+// // import { AppRouter } from './routers/AppRouter';
+// import AppMain from './AppMain';
+// // import { authReducer } from './reducer/AuthReducer';
 
-const init = () => {
-    return JSON.parse( localStorage.getItem('user') ) || { logged: false };
-    // return ""
-}
+// const init = () => {
+//     return JSON.parse( localStorage.getItem('user') ) || { logged: false };
+//     // return ""
+// }
 
-export const InitApp = () => {
+// export const AuthProvider = ({ children }) => {
 
-    const [ user, dispatch ] = useReducer( authReducer, {}, init );
+//     const [ user, dispatch ] = useReducer( authReducer, {}, init );
 
-    useEffect(() => {
-        if ( !user ) return;
+//     useEffect(() => {
+//         if ( !user ) return;
 
-        localStorage.setItem('user', JSON.stringify(user) );
-    }, [ user ])
+//         localStorage.setItem('user', JSON.stringify(user) );
+//     }, [ user ])
 
 
-    return (
-        <AuthContext.Provider value={{
-            user,
-            dispatch
-        }}>
-            <AppMain />
-        </AuthContext.Provider>
-    )
-}
+//     return (
+//         <AuthContext.Provider value={{
+//             user,
+//             dispatch
+//         }}>
+//             {children}
+//         </AuthContext.Provider>
+//     )
+// }
